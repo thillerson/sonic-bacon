@@ -1,0 +1,18 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fnil\fcharset0 Cochin;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 # Sonic Bacon: Introduction to Sound Design with PureData\
+\
+Last month we had a look at some basic UX principles of sound design. This month we're going to have a chance to build a sound from scratch, to get an idea of what sound design is like. We're going to use a tool called Pure Data. Pure Data is a really great software environment for digital signal processing (hereafter: DSP) including a data flow language for describing a signal flow visually.\
+\
+What do I mean by building a sound from scratch? For our purposes here, I mean using software to generate an audio signal, a flow of numbers representing audible information, and then using procedures to shape the signal to get a desired sound. Before we get started, let's make sure you have the tools we'll be using.\
+\
+## Installing Pure Data and Getting The Examples\
+\
+You can find more information about Pure Data (hereafter Pd) at {\field{\*\fldinst{HYPERLINK "http://puredata.info/downloads"}}{\fldrslt http://puredata.info}}, and download it from {\field{\*\fldinst{HYPERLINK "http://puredata.info/downloads"}}{\fldrslt http://puredata.info/downloads}}. There are two flavors of Pd: Vanilla (pun intended), and Pd-extended. The vanilla distribution is the core of Pd-extended, but the extended version contains a number of useful extensions. For the examples here, I used Pd-extended, and that's easier to install anyway, so I recommend that.\
+\
+If you'd like to check out the examples of the Pd files, which we call "patches", grab them from Github here: {\field{\*\fldinst{HYPERLINK "https://github.com/thillerson/sonic-bacon"}}{\fldrslt https://github.com/thillerson/sonic-bacon}}.\
+\
+Ok, now let's get started designing a sound. First I'm going to pick out and quickly analyze a real-world sound to try to simulate. Then we'll look at how we can use Pd to create the right signal to get us started. Then we'll iterate on a patch that gets us closer and closer to the sound we want to hear.}
