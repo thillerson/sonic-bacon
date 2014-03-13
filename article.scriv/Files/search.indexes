@@ -6,12 +6,40 @@
         </Document>
         <Document ID="3">
             <Title>Intro</Title>
+            <Text># Sonic Bacon: Introduction to Sound Design with PureData
+
+Last month we had a look at some basic UX principles of sound design. This month we're going to have a chance to build a sound from scratch, to get an idea of what sound design is like. We're going to use a tool called Pure Data. Pure Data is a really great software environment for digital signal processing (hereafter: DSP) including a data flow language for describing a signal flow visually.
+
+What do I mean by building a sound from scratch? For our purposes here, I mean using software to generate an audio signal, a flow of numbers representing audible information, and then using procedures to shape the signal to get a desired sound. Before we get started, let's make sure you have the tools we'll be using.
+
+## Installing Pure Data and Getting The Examples
+
+You can find more information about Pure Data (hereafter Pd) at http://puredata.info, and download it from http://puredata.info/downloads. There are two flavors of Pd: Vanilla (pun intended), and Pd-extended. The vanilla distribution is the core of Pd-extended, but the extended version contains a number of useful extensions. For the examples here, I used Pd-extended, and that's easier to install anyway, so I recommend that.
+
+If you'd like to check out the examples of the Pd files, which we call "patches", grab them from Github here: https://github.com/thillerson/sonic-bacon.
+
+Ok, now let's get started designing a sound. First I'm going to pick out and quickly analyze a real-world sound to try to simulate. Then we'll look at how we can use Pd to create the right signal to get us started. Then we'll iterate on a patch that gets us closer and closer to the sound we want to hear.</Text>
         </Document>
         <Document ID="8">
             <Title>Exporting</Title>
         </Document>
         <Document ID="4">
-            <Title>The Project</Title>
+            <Title>The Sound</Title>
+            <Text>## Making a Sound
+
+Ok, let's make a sound! Can you think of a better sound than bacon frying up in the morning? Because I can't. Also, what with the history of Ruby and bacon and Ruby and the Prags, it's a great tie in, however tenuous. &lt;homer voice&gt;Mmmm...  tenuous bacon&lt;/homer voice&gt;
+
+The sound of bacon frying is also relatively easy to reproduce. Let's break it down and analyze what happens when bacon fries in a pan. As the bacon sits in the pan and heats up, that sizzling sound you hear is actually water in the bacon fat reaching the boiling point and exploding as thousands of little bubbles popping. Occasionally, larger pockets of steam will get trapped and build up to the point where they make a larger, louder popping sound. We could go on to describe some other characteristics, like the effect on the sound of the oil which slowly fills up the pan, or the material the pan is made out of. For this exercise, though, I think we've captured the essence of the sound if we simulate both the more frequent, smaller bubbles and the large occasional loud pop.
+
+## The Plan
+
+Right off the bat, there's a few characteristics of this sound to note. First, it's aperiodic, which means that there're no repeating pattern to the sound. Second is that the sound doesn't really have a tone, but is instead a series of softer or louder quick bursts of energy, or impulses.
+
+Taking note of these two things, bells would be going off in a sound designer's head. We need something random to generate the base of this sound. It turns out there's a very common tool in the sound designer's belt for this purpose. The technical term is noise. More on that in a second.
+
+Now that we know the main characteristics of the sound, there are other questions we want to ask. Is it high or low sounding? Is it loud or soft sounding? How does it change over time? In this case, since the size of the bubbles is very small, the sound is fairly high sounding. It's closer to a high hiss than a low rumble. It's not very loud most of the time, but every time one of the pops happen, they're louder than the rest of the bubbles. Over time as cold bacon is added to a pan and gets warmer the sizzling gets louder and changes pitch a bit as the pan fills with oil. Let's leave that more complicated model for a different time. What we'll build here is a way to get the higher pitched sound and the louder pops.
+
+I think we have a good idea about how the sound works to get started. Now, I'll describe the steps that we can take to build a Pd patch that fulfill each one of these requirements: randomness, quick impulses, louder pops, and overall higher pitch. Let's get started by understanding the concept of noise.</Text>
         </Document>
         <Document ID="9">
             <Title>Recap</Title>

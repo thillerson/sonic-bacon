@@ -1,0 +1,20 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fnil\fcharset0 Cochin;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 ## Making a Sound\
+\
+Ok, let's make a sound! Can you think of a better sound than bacon frying up in the morning? Because I can't. Also, what with the history of Ruby and bacon and Ruby and the Prags, it's a great tie in, however tenuous. <homer voice>Mmmm...  tenuous bacon</homer voice>\
+\
+The sound of bacon frying is also relatively easy to reproduce. Let's break it down and analyze what happens when bacon fries in a pan. As the bacon sits in the pan and heats up, that sizzling sound you hear is actually water in the bacon fat reaching the boiling point and exploding as thousands of little bubbles popping. Occasionally, larger pockets of steam will get trapped and build up to the point where they make a larger, louder popping sound. We could go on to describe some other characteristics, like the effect on the sound of the oil which slowly fills up the pan, or the material the pan is made out of. For this exercise, though, I think we've captured the essence of the sound if we simulate both the more frequent, smaller bubbles and the large occasional loud pop.\
+\
+## The Plan\
+\
+Right off the bat, there's a few characteristics of this sound to note. First, it's aperiodic, which means that there're no repeating pattern to the sound. Second is that the sound doesn't really have a tone, but is instead a series of softer or louder quick bursts of energy, or impulses.\
+\
+Taking note of these two things, bells would be going off in a sound designer's head. We need something random to generate the base of this sound. It turns out there's a very common tool in the sound designer's belt for this purpose. The technical term is noise. More on that in a second.\
+\
+Now that we know the main characteristics of the sound, there are other questions we want to ask. Is it high or low sounding? Is it loud or soft sounding? How does it change over time? In this case, since the size of the bubbles is very small, the sound is fairly high sounding. It's closer to a high hiss than a low rumble. It's not very loud most of the time, but every time one of the pops happen, they're louder than the rest of the bubbles. Over time as cold bacon is added to a pan and gets warmer the sizzling gets louder and changes pitch a bit as the pan fills with oil. Let's leave that more complicated model for a different time. What we'll build here is a way to get the higher pitched sound and the louder pops.\
+\
+I think we have a good idea about how the sound works to get started. Now, I'll describe the steps that we can take to build a Pd patch that fulfill each one of these requirements: randomness, quick impulses, louder pops, and overall higher pitch. Let's get started by understanding the concept of noise.}
