@@ -42,19 +42,34 @@ Ok, let's make a sound! Can you think of a better sound than bacon frying up in 
 The sound of bacon frying is also relatively easy to reproduce. Let's break it down and analyze what happens when bacon fries in a pan. As the bacon sits in the pan and heats up, that sizzling sound you hear is a...</p>
 </li>
 <li>
-<p class="binderItem"><strong>Noise</strong></p>
+<p class="binderItem"><strong>Noise</strong><br/>## Noise: Random Sound<br/>
+<br/>
+So, we have two primary goals for simulating this sound: one is to produce short impulses, and the second is to produce them randomly. Let's be more specific and say that we want the impulses to be random in time and loudness, not in tone.<br/>
+<br/>
+There's a common generated sound called noise which fits the bill here. Noise is defined as a random signal. It's basically a series of impulses, again: quick bursts of energy, with random intensity (which we perceive as loudness) and ...</p>
 </li>
 <li>
-<p class="binderItem"><strong>Sizzle</strong></p>
+<p class="binderItem"><strong>Sizzle</strong><br/>## Sizzle<br/>
+<br/>
+So, the problem we want to fix is that the generated noise produces many random impulses distributed across all the audible frequencies, but we want fewer and only in a certain frequency range -- the range in which we want to hear the sizzle.<br/>
+<br/>
+To do this, we can use a filter. A filter affects sounds by excluding certain frequencies and allowing others to pass through unchanged. An equalizer on your stereo makes use of filters.<br/>
+<br/>
+We'll use a certain type of filter called a "bandpass" fi...</p>
 </li>
 <li>
-<p class="binderItem"><strong>Sizzle and Pop</strong></p>
+<p class="binderItem"><strong>Pop</strong><br/>## Pop<br/>
+<br/>
+To get the popping sound what we'll do is just duplicate what we did for the sizzle, but with some different parameters for a slightly different sound.<br/>
+<br/>
+First, though, disconnect the "output~" and move it to the side. After the "-~ 0.2" create an object: "throw~ out" and connect the "-~ 0.2" to it. Then above the "output~" add an object containing "catch~ out". The throw/catch pattern is a common way to clean up Pd patches that require multiple connections. Signals are sent from one or m...</p>
 </li>
 <li>
-<p class="binderItem"><strong>Exporting</strong></p>
-</li>
-<li>
-<p class="binderItem"><strong>Recap</strong></p>
+<p class="binderItem"><strong>Finishing Up</strong><br/>## Finishing Up<br/>
+<br/>
+Listening to the sound we're producing so far, it's just a little off. It's a little too low-sounding. To clean this up we'll use another filter, a high-pass filter. A high pass filter allows frequencies above a certain point through, and attenuates lower frequencies. This would be like turning the bass all the way down on your radio.<br/>
+<br/>
+To add this object, disconnect the "catch~ out" object and put an object with the text "hip~ 2200" between the "catch~" and the "output~". Listen...</p>
 </li>
 </ul>
 

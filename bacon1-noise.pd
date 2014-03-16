@@ -1,8 +1,5 @@
-#N canvas 590 295 226 103 10;
+#N canvas 590 295 118 90 10;
 #X obj 9 -28 noise~;
-#X obj 9 4 throw~ out;
-#X obj 100 -26 catch~ out;
-#X obj 100 9 output~;
+#X obj 9 3 output~;
 #X connect 0 0 1 0;
-#X connect 2 0 3 0;
-#X connect 2 0 3 1;
+#X connect 0 0 1 1;

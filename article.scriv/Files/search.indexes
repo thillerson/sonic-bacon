@@ -46,6 +46,25 @@ I think we have a good idea about how the sound works to get started. Now, I'll 
         </Document>
         <Document ID="5">
             <Title>Noise</Title>
+            <Text>## Noise: Random Sound
+
+So, we have two primary goals for simulating this sound: one is to produce short impulses, and the second is to produce them randomly. Let's be more specific and say that we want the impulses to be random in time and loudness, not in tone.
+
+There's a common generated sound called noise which fits the bill here. Noise is defined as a random signal. It's basically a series of impulses, again: quick bursts of energy, with random intensity (which we perceive as loudness) and random frequency (which we perceive as low or high tone). Noise is classified into different colors by how the impulses are distributed statistically over the whole range from low to high, called the frequency range. White noise has an equal distribution from low to high. Pink noise has a distribution where the intensity is inversely proportional to the frequency. There are other colors too.
+
+White noise is so commonly used in sound generation that Pd  has a tool for producing it. Open up Pd and let's give it a try. The following steps are the ones I took to create the bacon1-noise.pd patch in the example code. You can follow along with the instructions, or just review the patch and see where we end up at the end of this step.
+
+[editor: I have an image we can put here]
+
+## Making Some Noise
+
+Create a new document from the File &gt; New menu item. You should have a blank window, which is where we can edit the patch. Now use Put &gt; Object. You'll end up with a box with a dashed line around it that follows your mouse around the window. If you type in the word "noise~" and then click away, you'll end up with a solid box. This represents a Pd object. An object is like an instance of a class, where the type of the class is the name you put in the box. As long as that word corresponds to an object Pd knows about, you'll have a Pd object in the patch that you can connect with other objects to create and direct signal flows. If Pd doesn't know about the name you put in the box, for instance if you type in 'foo', which doesn't mean anything to Pd, then it will show up as a red box indicating an error.
+
+Ok, now we have a "noise~" object. By the way, the tilde on the end of "noise~" is a Pd convention indicating that an object produces or works with a signal. A signal is a stream of data that can produce a sound, or in some cases modify another signal. So far we don't hear anything though. Create another object with Put &gt; Object, and call this one "output~". An "output~" object is a Pd extension that allows us to send a signal to the sound card, control the volume, and also turn on and off the global DSP setting. When DSP is on, Pd will produce signals, and therefore, potentially, sound. It corresponds to the big "DSP" toggle button on Pd-extended's main window. One way to think of it is a quick kill signal. Public Service Announcement: Always make sure you take proper precautions to protect your ears when dealing with sound generation. Who knew programming could be so dangerous?
+
+Ok, now, to listen to what noise sounds like, hover your mouse over the little dark box on the bottom of the "noise~" object. Your pointer should turn into a ring shape. This box is called an "outlet". If you drag from that box to the top-left box of the "output~" object, you'll create a connection from the "noise~" to the "output~". Drag again from the noise outlet to the top-right box of the "output~" object. There are two boxes because they correspond to your left and right speakers. Now slowly drag the volume slider on the "output~" object until you can hear the sound coming from your speakers. Sounds a bit like an old T.V. or radio tuned to an empty station, right? That's the sweet sound of even power distribution over the audible spectrum, baby!
+
+Ok, now we have noise, which I've told you is a good building block for the sound of sizzling bacon, but we have a bit more to do before the one sounds like the other. The first thing we need to do is be a bit more selective about the noise that we allow through the speakers, so we can move away from a hissing sound to the sound of lots of small pops.</Text>
         </Document>
         <Document ID="6">
             <Title>Sizzle</Title>
