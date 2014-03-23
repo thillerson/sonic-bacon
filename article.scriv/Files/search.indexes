@@ -2,7 +2,18 @@
 <SearchIndexes Version="1.0">
     <Documents>
         <Document ID="7">
-            <Title>Sizzle and Pop</Title>
+            <Title>Pop</Title>
+            <Text>## Pop
+
+To get the popping sound what we'll do is just duplicate what we did for the sizzle, but with some different parameters for a slightly different sound.
+
+First, though, disconnect the "output~" and move it to the side. After the "-~ 0.2" create an object: "throw~ out" and connect the "-~ 0.2" to it. Then above the "output~" add an object containing "catch~ out". The throw/catch pattern is a common way to clean up Pd patches that require multiple connections. Signals are sent from one or more named "throw~" objects to a correspondingly named "catch~" object, avoiding a bunch of connections all over the screen.
+
+Now side by side with the stack of objects already in the patch, add objects with these names and arguments: "bp~ 500 0.8", "max~ 0.7", "-~ 0.7". This will take the same noise, but filter with a bandpass filter centered at 500 Hz with a Q of 0.8, take only frequencies above 0.7, and recenter that new signal. This will produce a popping noise when everything is connected up. First, though, to make it stand out a bit from the sizzling noise, let's turn it up a bit. Add an object with the text "*~ 12" (thats asterisk-tilde 12) below the signal subtraction object. This is a signal multiplier object. Multiplying a signal makes it louder. Finally, add another "throw~ out" below the multiplier. 
+
+[editor: I have a pdf image to put here]
+
+Now we have a pretty good simulation of bacon frying. Let's take one more step to improve the sound, and then take stock of where we are and what we've learned.</Text>
         </Document>
         <Document ID="3">
             <Title>Intro</Title>
@@ -42,7 +53,18 @@ Now that we know the main characteristics of the sound, there are other question
 I think we have a good idea about how the sound works to get started. Now, I'll describe the steps that we can take to build a Pd patch that fulfill each one of these requirements: randomness, quick impulses, louder pops, and overall higher pitch. Let's get started by understanding the concept of noise.</Text>
         </Document>
         <Document ID="9">
-            <Title>Recap</Title>
+            <Title>Finishing Up</Title>
+            <Text>## Finishing Up
+
+Listening to the sound we're producing so far, it's just a little off. It's a little too low-sounding. To clean this up we'll use another filter, a high-pass filter. A high pass filter allows frequencies above a certain point through, and attenuates lower frequencies. This would be like turning the bass all the way down on your radio.
+
+To add this object, disconnect the "catch~ out" object and put an object with the text "hip~ 2200" between the "catch~" and the "output~". Listen to it and see if it doesn't sound a little more like what we want. If you'd like, edit the frequency, but switching to edit mode and double-clicking inside the "hip~" object to change the argument.
+
+## Recap
+
+So what we learned is that we can use Pd to make some realistic effects. We created a bacon sizzling effect by starting with noise, subtracting away some frequencies we didn't want to hear, and then finally tuning it a little bit to what we wanted to hear more of. 
+
+Sound design is a lot of fun on its own, and it can add some magic to apps and games that you're producing. I hope this article helped you get an idea of how it works and interests you in giving it a try.  </Text>
         </Document>
         <Document ID="5">
             <Title>Noise</Title>
@@ -64,10 +86,35 @@ Ok, now we have a "noise~" object. By the way, the tilde on the end of "noise~" 
 
 Ok, now, to listen to what noise sounds like, hover your mouse over the little dark box on the bottom of the "noise~" object. Your pointer should turn into a ring shape. This box is called an "outlet". If you drag from that box to the top-left box of the "output~" object, you'll create a connection from the "noise~" to the "output~". Drag again from the noise outlet to the top-right box of the "output~" object. There are two boxes because they correspond to your left and right speakers. Now slowly drag the volume slider on the "output~" object until you can hear the sound coming from your speakers. Sounds a bit like an old T.V. or radio tuned to an empty station, right? That's the sweet sound of even power distribution over the audible spectrum, baby!
 
-Ok, now we have noise, which I've told you is a good building block for the sound of sizzling bacon, but we have a bit more to do before the one sounds like the other. The first thing we need to do is be a bit more selective about the noise that we allow through the speakers, so we can move away from a hissing sound to the sound of lots of small pops.</Text>
+Ok, now we have noise, which I've told you is a good building block for the sound of sizzling bacon, but we have a bit more to do before the one sounds like the other. The first thing we need to do is be a bit more selective about the noise that we allow through the speakers, so we can move away from a hissing sound to a sizzling sound.</Text>
         </Document>
         <Document ID="6">
             <Title>Sizzle</Title>
+            <Text>## Sizzle
+
+So, the problem we want to fix is that the generated noise produces many random impulses distributed across all the audible frequencies, but we want fewer and only in a certain frequency range -- the range in which we want to hear the sizzle.
+
+To do this, we can use a filter. A filter affects sounds by excluding certain frequencies and allowing others to pass through unchanged. An equalizer on your stereo makes use of filters.
+
+We'll use a certain type of filter called a "bandpass" filter, which will allow certain everything around a given frequency through, and cut out those on either side. To do this I placed an object after the "noise~" object and entered the text "bp~ 2000 2". This says to Pd: "Create a band pass filter, set it's center frequency to 2000 and its Q to 2".
+
+Let's go over that again. The object "bp~" is a bandpass filter object. Pd objects also take arguments, like a function or shell command. In this case, the arguments are 2000 and 2, separated by a space. 2000 sets the center frequency to 2 kilohertz, or 2000 cycles per second, roughly midway into the audible frequencies. The Q value specifies how quickly to attenuate, or gradually "turn down" the frequencies on either side of the center, making a bell shape. A Q of 2 is fairly broad, so the filter will let a wide band around the center frequency through.
+
+If you want to hear what this sounds like, connect the "noise~" to the filter and the filter to the "output~". It sounds a lot closer to what we want. Let's cut down on the number of impulses just a little bit more by disconnecting the filter from the outlet.
+
+To do this select Edit &gt; Edit Mode from the menu, select a connection line going from "noise~" to "output~" and press delete. Select and delete the other line, too. Edit Mode is a toggle in Pd, which switches between a mode where you can select and move objects and a "performance" mode where you can interact with objects. In Edit Mode when hovering over an object, your mouse pointer will turn into a pointing hand.
+
+Now continue by adding below the "noise~" object an object with the text "max~ 0.2" and then another object after that with "-~ 0.2" (minus-tilde). Then connect the filter to the "max~", the "max~" to the "-~", and the "-~" to both sides of the "output~". That sounds even closer to a sizzling sound.
+
+What we did here was to use the "max~" object to only allow the signal from the filter through when the amplitude was above 0.2 (where 1 is the highest and -1 the lowest value). This will cut out frequencies below 0.2, and keep all the amplitudes positive. Since we did that, we want to subtract 0.2 with a "-~" to "re-center" the wave to where the lowest amplitude is 0, not 0.2.
+
+[editor: I have a pdf image to go here]
+
+It might make it a little clearer if we look at graphs of the noise, the filtered noise, and then the signal with a max of 0.2, recentered.
+
+[editor: I have a pdf image to go here]
+
+That sounds a lot more like a sizzling pan of bacon. Next step, let's add pops for an even more realistic sound.</Text>
         </Document>
     </Documents>
 </SearchIndexes>
